@@ -85,7 +85,7 @@
 				</section>
 
 				<section data-background="#dddddd">
-                    <h2>Building an API with Yii2</h2>
+                    <h2>Building the API with Yii2</h2>
 				</section>
 
 				<section>
@@ -338,12 +338,11 @@ Add CORS and Auth behaviours. CORS filter must be first.
 				<section data-background="#dddddd">
                     <h3>Adding User Auth</h3>
                     <p>New methods need to be added to both the user controller and model. It would be
-                        easier to refer to the commit on <a href="https://github.com/doublehops/yii-api-vm/commit/1f61861a57f4fb17d7145e0661db4187442b6978">Github</a></h3>
+                        easier to refer to the commit on <a href="https://github.com/doublehops/yii-api-vm/commit/1f61861a57f4fb17d7145e0661db4187442b6978">Github</a></p>
                 </section>
 
 				<section data-background="#dddddd">
-                    <h3>Adding an Admin Backend</h3>
-                    <p>Adding behaviours to the API</h3>
+                    <p>Adding behaviours to the base model</h3>
                     <pre>
 Add to common/models/BaseModel.php
                         <code>
@@ -367,24 +366,25 @@ public function behaviors()
                         </code></pre>
                 </section>
 
-                <section>
-                    <pre>
-                        <code>
+				<section data-background="#dddddd">
+                    <h3>Adding an Admin Backend</h3>
+                </section>
 
-                        </code></pre>
+                <section>
+                    <p>Adding a standard Yii web admin backend by running the the Gii CRUD tool to build the backend files.</p>
+                    <p>Point browser to backend domain: eg. http://admin.domain.com/?r=user</p>
                 </section>
 
 				<section data-background="#dddddd">
-                    <h3>Adding an Admin Backend</h3>
-                    <p>Adding behaviours to the API</h3>
-                </section>
-
-                <section>
-                    <pre>
-                        <code>
-
-                        </code></pre>
-                </section>
+					<h2>Building a RESTful API with Yii2</h2>
+                    <p>&nbsp;</p>
+                    <p>Presentation: <a href="https://doublehops.com/presentations/yii2-api-presentation/">https://doublehops.com/presentations/yii2-api-presentation/</a></p>
+                    <p>VM and sample code: <a href="https://github.com/doublehops/yii-api-vm">https://github.com/doublehops/yii-api-vm</a></p>
+                    <p>&nbsp;</p>
+                    <p>Presented by Damien Buttler</p>
+					<p>
+						<small>phpMelb - March 15, 2016</small>
+					</p>
 
 			</div>
 
