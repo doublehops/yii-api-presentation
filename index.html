@@ -196,8 +196,7 @@ Pretty Urls: Edit frontend/config/main.php
     'enableStrictParsing' => true,
     'showScriptName' => false,
     'rules' => [
-        '&#x3C;controller:[^/]+&#x3E;/&#x3C;action:[^/]+&#x3E;&#x27; =&#x3E; &#x27;&#x3C;controller&#x3E;/&#x3C;action&#x3E;',
-        '&#x3C;controller:[^/]+&#x3E;/&#x3C;action:[^/]+&#x3E;/&#x3C;id:\d+&#x3E;&#x27; =&#x3E; &#x27;&#x3C;controller&#x3E;/&#x3C;action&#x3E;',
+        ['class' => 'yii\rest\UrlRule', 'controller' => 'user', 'pluralize' => false],
     ],
 ]</code></pre>
                     <pre>
@@ -224,8 +223,85 @@ Post: http://phpmelb.api/user/create
                 </section>
 
                 <section>
+                    <h3>Default API Response Headers</h3>
                     <pre>
                         <code>
+X-Pagination-Current-Page => 1
+X-Pagination-Page-Count => 1
+X-Pagination-Per-Page => 20
+X-Pagination-Total-Count => 2
+                        </code></pre>
+                </section>
+
+                <section>
+                    <h3>Refining result set</h3>
+                    <table>
+                        <tr><td>Limit results per page</td><td>?per-page=3</td></tr>
+                        <tr><td>Show specific page</td><td>?page=2</td></tr>
+                    </table>
+                </section>
+
+                <section>
+                    <h3>Overriding actions and further refining of results</h3>
+                    <pre>
+Edit frontend/controllers/UserController.php
+                        <code>
+    public function actions()
+    {
+        $actions = parent::actions();
+        $actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
+
+        return $actions;
+    }
+
+    public function prepareDataProvider()
+    {
+        $searchModel = new \common\models\UserSearch();
+        return $searchModel->search(Yii::$app->request->queryParams);
+    }
+
+                        </code></pre>
+                </section>
+
+                <section>
+                    <h3>Use Gii CRUD tool to generate User Search file</h3>
+                    <pre>
+Modify load params method in common/models/UserSearch.php:
+                        <code>
+$this->load($params, '');
+                        </code></pre>
+                    <pre>
+And filter by model attributes:
+                        <code>
+?username=bob
+                        </code></pre>
+                    <pre>
+And filter by pseudo attributes:
+                        <code>
+?time_from=2016-01-01 10:00:00&amp;time_to=2016-01-31 23:59:59</code><code>
+-&gt;andFilterWhere(['&gt;=', 'created_at', $this-&gt;time_from])
+-&gt;andFilterWhere(['&lt;=', 'created_at', $this-&gt;time_to]);</code></pre>
+                </section>
+
+				<section data-background="#dddddd">
+                    <h3>Behaviours</h3>
+                    <p>Adding behaviours to the API</h3>
+                </section>
+
+				<section data-background="#dddddd">
+                    <h3>Adding User Auth</h3>
+                    <p>Adding behaviours to the API</h3>
+                </section>
+
+				<section data-background="#dddddd">
+                    <h3>Adding an Admin Backend</h3>
+                    <p>Adding behaviours to the API</h3>
+                </section>
+
+                <section>
+                    <pre>
+                        <code>
+
                         </code></pre>
                 </section>
 
