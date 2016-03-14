@@ -223,6 +223,32 @@ Post: http://phpmelb.api/user/create
                 </section>
 
                 <section>
+                    <h3>User View</h3>
+                    <pre>
+View user and its attributes: GET http://phpmelb.api/user/1
+                        <code>
+{
+    "id": 1,
+    "username": "bob",
+    "email": "bob@gmail.com",
+    "password_hash":"mypassword"
+}
+                        </code></pre>
+                    <pre>
+Restrict field outputs. Add fields method to common/models/User.php
+                        <code>
+public function fields()
+{
+    return [
+        'id',
+        'username',
+        'email',
+    ];
+}
+                        </code></pre>
+                </section>
+
+                <section>
                     <h3>Default API Response Headers</h3>
                     <pre>
                         <code>
