@@ -133,6 +133,88 @@ Run migration:
                     </pre>
 				</section>
 
+                <section>
+                    <pre>
+Run Gii to create model Class:
+                        <code>
+./yii gii/model --tableName=user --modelClass=User
+                        </code>
+                    </pre>
+                    <pre>
+Move file from console/models to common/models and change namespace to:
+                        <code>
+namespace common\models;
+                        </code>
+                    </pre>
+				</section>
+
+                <section>
+                    <pre>
+Configure Gii in frontend/config/main.php
+                        <code>
+    'modules' => [
+        'gii' => [
+            'class' => 'yii\gii\Module',
+            'allowedIPs' => ['192.168.10.1'],
+        ],
+    ],
+
+                        </code>
+                    </pre>
+                    <pre>
+And run gii from to create the User controller:
+                        <code>
+http://phpmelb.api/index.php?r=gii
+                        </code>
+                    </pre>
+				</section>
+
+                <section>
+                    <h3>Configure application as a RESTful API</h3>
+                    <p>From guide: http://www.yiiframework.com/doc-2.0/guide-rest-quick-start.html</p>
+                    <pre>
+Edit frontend/controllers/UserController.php
+                        <code>
+namespace frontend\controllers;
+
+use yii\rest\ActiveController;
+
+class UserController extends ActiveController
+{
+    public $modelClass = 'common\models\User';
+}
+                        </code>
+                    </pre>
+                </section>
+
+                <section>
+                    <pre>
+Pretty Urls: Edit frontend/config/main.php
+                        <code>
+'urlManager' => [
+    'enablePrettyUrl' => true,
+    'enableStrictParsing' => true,
+    'showScriptName' => false,
+    'rules' => [
+        '&#x3C;controller:[^/]+&#x3E;/&#x3C;action:[^/]+&#x3E;&#x27; =&#x3E; &#x27;&#x3C;controller&#x3E;/&#x3C;action&#x3E;',
+        '&#x3C;controller:[^/]+&#x3E;/&#x3C;action:[^/]+&#x3E;/&#x3C;id:\d+&#x3E;&#x27; =&#x3E; &#x27;&#x3C;controller&#x3E;/&#x3C;action&#x3E;',
+    ],
+]</code></pre>
+                    <pre>
+Allow Json input: Edit frontend/config/main.php
+                        <code>
+'request' => [
+    'parsers' => [
+        'application/json' => 'yii\web\JsonParser',
+    ]
+]</code></pre>
+                </section>
+
+                <section>
+                    <pre>
+                        <code>
+                        </code></pre></section>
+
 			</div>
 
 		</div>
