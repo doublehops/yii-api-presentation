@@ -311,12 +311,67 @@ And filter by pseudo attributes:
 
 				<section data-background="#dddddd">
                     <h3>Behaviours</h3>
-                    <p>Adding behaviours to the API</h3>
+                    <p>Adding behaviours to the API. Behaviours is a way to allow Yii/PHP to work around the limitation that PHP can only extend one class.</p>
+                </section>
+
+                <section>
+                    <pre>
+Add CORS and Auth behaviours. CORS filter must be first.
+                        <code>
+    public function behaviors()
+    {
+        return ArrayHelper::merge([
+            'corsFilter' => [
+                'class' => Cors::className(),
+            ],
+            [
+                'class' => HttpBearerAuth::className(),
+                'except' => ['options'],
+            ],
+        ], parent::behaviors());
+
+        return $behaviors;
+    }
+                        </code></pre>
                 </section>
 
 				<section data-background="#dddddd">
                     <h3>Adding User Auth</h3>
+                    <p>New methods need to be added to both the user controller and model. It would be
+                        easier to refer to the commit on <a href="https://github.com/doublehops/yii-api-vm/commit/1f61861a57f4fb17d7145e0661db4187442b6978">Github</a></h3>
+                </section>
+
+				<section data-background="#dddddd">
+                    <h3>Adding an Admin Backend</h3>
                     <p>Adding behaviours to the API</h3>
+                    <pre>
+Add to common/models/BaseModel.php
+                        <code>
+public function behaviors()
+{
+    return [
+        [
+            'class' => TimestampBehavior::className(),
+            'createdAtAttribute' => 'created_at',
+            'updatedAtAttribute' => 'updated_at',
+            'value' => function() { return date('Y-m-d H:i:s'); },
+        ],
+        [
+            'class' => BlameableBehavior::className(),
+            'createdByAttribute' => 'created_by',
+            'updatedByAttribute' => 'updated_by',
+        ],
+    ];
+}
+
+                        </code></pre>
+                </section>
+
+                <section>
+                    <pre>
+                        <code>
+
+                        </code></pre>
                 </section>
 
 				<section data-background="#dddddd">
