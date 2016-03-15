@@ -58,10 +58,10 @@
 				<section>
 					<h3>What's an API?</h3>
 					<p>
-					    An API is an Application Programming Interface that that is designed to allow other programs to interact with it. 
+					    An API is an Application Programming Interface that is designed to allow other programs to interact with it. 
                     </p>
                     <p>
-                        To create/update/ead/delete data through agnostic interface.
+                        To create/update/read/delete data through agnostic interface.
 					</p>
 				</section>
 
@@ -171,10 +171,12 @@ http://phpmelb.api/index.php?r=gii
 
                 <section>
                     <h3>Configure application as a RESTful API</h3>
-                    <p>From guide: http://www.yiiframework.com/doc-2.0/guide-rest-quick-start.html</p>
+                    <p><small>From guide: http://www.yiiframework.com/doc-2.0/guide-rest-quick-start.html</small></p>
                     <pre>
 Edit frontend/controllers/UserController.php
                         <code>
+&lt;?php
+
 namespace frontend\controllers;
 
 use yii\rest\ActiveController;
@@ -198,7 +200,7 @@ Pretty Urls: Edit frontend/config/main.php
     'rules' => [
         ['class' => 'yii\rest\UrlRule', 'controller' => 'user', 'pluralize' => false],
     ],
-]</code></pre>
+],</code></pre>
                     <pre>
 Allow Json input: Edit frontend/config/main.php
                         <code>
@@ -206,7 +208,7 @@ Allow Json input: Edit frontend/config/main.php
     'parsers' => [
         'application/json' => 'yii\web\JsonParser',
     ]
-]</code></pre>
+],</code></pre>
                 </section>
 
                 <section>
@@ -305,8 +307,7 @@ And filter by model attributes:
 And filter by pseudo attributes:
                         <code>
 ?time_from=2016-01-01 10:00:00&amp;time_to=2016-01-31 23:59:59</code><code>
--&gt;andFilterWhere(['&gt;=', 'created_at', $this-&gt;time_from])
--&gt;andFilterWhere(['&lt;=', 'created_at', $this-&gt;time_to]);</code></pre>
+-&gt;andFilterWhere(['between', 'created_at', $this-&gt;time_from, $this-&gt;time_to]);</code></pre>
                 </section>
 
 				<section data-background="#dddddd">
@@ -341,7 +342,7 @@ Add CORS and Auth behaviours. CORS filter must be first.
                         easier to refer to the commit on <a href="https://github.com/doublehops/yii-api-vm/commit/1f61861a57f4fb17d7145e0661db4187442b6978">Github</a></p>
                 </section>
 
-				<section data-background="#dddddd">
+				<section>
                     <p>Adding behaviours to the base model</h3>
                     <pre>
 Add to common/models/BaseModel.php
